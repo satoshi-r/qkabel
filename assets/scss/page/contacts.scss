@@ -1,0 +1,198 @@
+.page-wrapper.contacts-page {
+    .main-wrapper {
+        padding-bottom: 0;
+    }
+
+    .content-items {
+        display: none;
+    }
+
+    .contacts {
+        width: 300px;
+        height: 350px;
+        padding: 24px;
+        background: $bg_white;
+        border-radius: 8px;
+        position: absolute;
+        top: calc(50% - 350px/2);
+        z-index: 2;
+
+        &-block {
+            margin-bottom: 16px;
+
+            &-title {
+                @extend %m1024_h2;
+                margin-bottom: 4px;
+                color: $red;
+            }
+
+            &-mail {
+                border-bottom: 1px solid $red;
+                padding-bottom: 2px;
+
+                &:hover {
+                    color: $btn_active_red;
+                    border-color: $btn_active_red;
+                }
+            }
+
+            p {
+                margin: 0;
+            }
+
+            a {
+                color: $black;
+
+                &:hover {
+                    color: $btn_active_red;
+                }
+            }
+        }
+
+        &-btn {
+            @extend %m1024_h2;
+            background: none;
+            color: $red;
+
+            &:before {
+                background: url('~assets/img/underline-red.svg') repeat;
+            }
+
+            &:after {
+                background: url('~assets/img/underline-darkred.svg') repeat;
+            }
+
+            &:hover {
+                color: $btn_active_red;
+            }
+        }
+
+        
+    }
+
+    .popup-requisites {
+        width: auto;
+        height: auto;
+        top: calc(50% - 350px/2);
+        left: initial;
+
+        .popup-container {
+            flex-direction: column;
+            justify-content: initial;
+        }
+
+        .popup-main {
+            width: 300px;
+            height: 350px;
+            padding: 24px;
+        }
+
+        .popup-title {
+            @extend %m1024_h2;
+            color: $red;
+            margin-bottom: 8px;
+        }
+
+        .requisites-block {
+            margin-bottom: 8px;
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+    }
+
+    // серый фильтр для карты
+    [class*="ymaps-2"][class*="-ground-pane"] {
+        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+        -webkit-filter: grayscale(100%);
+    }
+
+    #map {
+        width: 100vw;
+        height: calc(100vh - 162px);
+        position: absolute;
+        left: 0;
+    }
+
+    .zoom-controls {
+        transform: translateX(calc(100vw - 72px)) translateY(calc(50vh - 150% - 108px));
+    }
+
+    #zoom-in,
+    #zoom-out {
+        width: 40px;
+        height: 40px;
+        border: 1px solid $red;
+        border-radius: 4px;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: $white;
+        }
+    }
+
+    #zoom-in {
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper.contacts-page {
+
+        .contacts {
+            width: 458px;
+            height: 448px;
+            top: calc(53% - 448px/2);
+
+            .contacts-block-title {
+                @include text(16px, 600, 24px, 2px, uppercase);
+                margin-bottom: 8px;
+            }
+
+            .contacts-block {
+                margin-bottom: 24px;
+
+                a, p {
+                    @include text(16px, 400, 24px, normal, initial);
+                }
+            }
+
+            .contacts-btn {
+                @include text(16px, 600, 24px, 2px, uppercase);
+            }
+        }
+
+        .popup-requisites {
+            top: calc(53% - 448px/2);
+            
+            .popup-main {
+                padding: 32px;
+                width: 458px;
+                height: 448px;
+            }
+
+            .popup-title {
+                @include text(16px, 600, 24px, 2px, uppercase);
+            }
+
+            .requisites-block {
+                @include text(16px, 400, 24px, normal, initial);
+            }
+        }
+
+        .zoom-controls {
+            transform: translateX(calc(100vw - 90px)) translateY(calc(50vh - 150% - 108px));
+        }
+
+        #zoom-in,
+        #zoom-out {
+            width: 44px;
+            height: 44px;
+        }
+    }
+}

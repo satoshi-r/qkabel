@@ -1,0 +1,36 @@
+// base
+@import 'vars';
+@import 'template/base/fonts.scss';
+@import 'template/base/general.scss';
+
+// components
+@import 'template/components/buttons.scss';
+@import 'template/components/checkbox.scss';
+@import 'template/components/counter.scss';
+@import 'template/components/dropdown.scss';
+@import 'template/components/fast-search.scss';
+@import 'template/components/filter.scss';
+@import 'template/components/form.scss';
+@import 'template/components/order.scss';
+@import 'template/components/pagination.scss';
+@import 'template/components/popup.scss';
+@import 'template/components/scrollbar.scss';
+@import 'template/components/tables.scss';
+
+@import 'template/header.scss';
+@import 'template/footer.scss';
+@import 'template/stab.scss';
+
+// pages
+@import 'page/catalog/catalog.scss';
+@import 'page/catalog/product.scss';
+@import 'page/404.scss';
+@import 'page/contacts.scss';
+@import 'page/content.scss';
+@import 'page/main.scss';
+@import 'page/search.scss';
+@import 'page/send.scss';
+@import 'page/ui-page.scss';
+
+
+

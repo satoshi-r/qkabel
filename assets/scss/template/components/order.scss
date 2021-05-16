@@ -1,0 +1,96 @@
+.page-wrapper {
+    .order {
+        @extend %m1024_regular_14_20;
+        width: 304px;
+        height: max-content;
+        padding: 24px 32px;
+        padding-right: 18px;
+        box-shadow: $plate_shadow;
+        background-color: $white;
+        border-radius: 8px;
+        position: sticky;
+        top: 90px;
+        flex-shrink: 0;
+    
+        &-exist {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+    
+    
+        }
+    
+        &-price-wrap {
+            @include text(16px, 600, 20px, 2px, normal);
+            margin-top: 2px;
+            margin-bottom: 16px;
+            display: flex;
+        }
+    
+        .counter {
+            height: 40px;
+            margin-bottom: 16px;
+    
+            &-plus,
+            &-minus {
+                width: 40px;
+            }
+    
+            &-input {
+                @extend %m1024_h3;
+                width: 85px;
+                color: initial !important
+            }
+        }
+    
+        &-total-wrap {
+            @include text(28px, 600, 32px, 4px, uppercase);
+            margin-bottom: 16px;
+            display: flex;
+        }
+    
+        &-btn {
+            padding: 0 38px;
+        }
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper {
+        .order {
+            @include text(16px, 400, 20px, normal, initial);
+            width: 338px;
+            padding: 24px;
+            padding-right: 18px;
+            top: 100px;
+    
+            &-exist {
+                margin-bottom: 16px;
+            }
+    
+            &-price-wrap {
+                @include text(24px, 600, 20px, 2px, uppercase);
+                margin-top: 8px;
+                margin-bottom: 24px;
+            }
+    
+            &-total {
+                @include text(36px, 600, 40px, 4px, uppercase);
+            }
+    
+            .counter {
+                margin-bottom: 24px;
+                height: 44px;
+    
+                &-minus,
+                &-plus {
+                    width: 44px;
+                }
+    
+                &-input {
+                    @include text(16px, 600, 20px, normal, initial);
+                } 
+            }
+        }
+    }
+}

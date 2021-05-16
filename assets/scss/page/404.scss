@@ -1,0 +1,59 @@
+.page-wrapper.page-404 {
+    padding-bottom: 62px;
+
+    h1 {
+        display: none;
+    }
+
+    .content-items {
+        display: none;
+    }
+
+    .main-container {
+        padding: 0;
+    }
+
+    .main-wrapper {
+        padding-bottom: 0;
+    }
+
+    .main {
+        padding-top: 50px;
+        display: block;
+        text-align: center;
+
+
+        &-subtitle {
+            @include text(16px, 600, 20px, 2px, uppercase);
+            margin-bottom: 8px;
+        }
+
+        &-title {
+            @include text(32px, 600, 40px, 6px, uppercase);
+            margin-bottom: 8px;
+        }
+
+        &-description {
+            @include text(16px, 400, 24px, normal, initial);
+            margin-bottom: 40px;
+
+            a {
+                color: $green;
+
+                &:hover {
+                    color: $btn_active_green;
+                }
+            }
+        }
+
+        &-img {
+            position: absolute;
+            bottom: 62px;
+            left: 0;
+            object-fit: cover;
+            object-position: center;
+            height: calc(100% - 350px);
+            width: 100%;
+        }
+    }
+}

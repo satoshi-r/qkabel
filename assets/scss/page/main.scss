@@ -1,0 +1,162 @@
+.page-wrapper {
+    .content-items {
+        display: none;
+    }
+
+    .substrate {
+        background-color: $blue;
+        height: 53px;
+        width: 100%;
+        display: block;
+    }
+
+    h1 {
+        margin-bottom: 16px;
+        padding: 0;
+    }
+
+    h2 {
+        @extend %m1024_h1;
+        margin-bottom: 16px;
+    }
+
+    .catalog-main {
+        background: $bg_white;
+        width: 100%;
+        box-shadow: $plate_shadow;
+        border-radius: 8px;
+        position: relative;
+        top: -53px;
+        z-index: 2;
+        padding: 24px 40px;
+        padding-bottom: 32px;
+
+        .catalog-list {
+            display: block;
+            column-width: 245px;
+            column-gap: 6%;
+            column-count: 3;
+        }
+
+        .catalog-item {
+            margin-left: -8px;
+            max-width: 385px;
+
+            a {
+                @extend %m1024_regular_14_20;
+                color: $black;
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+                padding: 8px;
+                padding-right: 0;
+
+                &:hover {
+                    color: $red;
+                }
+            }
+        }
+    }
+
+    .popular {
+        position: relative;
+        top: -24px;
+
+        &-wrap {
+            display: block;
+            width: 100%;
+        }
+
+        &-section {
+            background: $bg_white;
+            box-shadow: $plate_shadow;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            padding: 16px;
+            padding-bottom: 8px;
+            display: flex;
+            flex-direction: column;
+            transition: none;
+
+            .section-title {
+                @extend %m1024_h2;
+                margin-bottom: 12px;
+                width: 80%;
+            }
+
+            .section-group {
+                display: flex;
+                flex-flow: wrap;
+
+                .btn-stroke {
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper.main-page {
+
+        h2 {
+            @include text(32px, 600, 40px, 6px, uppercase);
+        }
+
+        .catalog-main {
+            padding: 32px 40px;
+            top: -64px;
+
+            .catalog-item {
+                max-width: 310px;
+                margin-bottom: 4px;
+                margin-right: -10px;
+
+                a {
+                    @include text(16px, 400, 20px, normal, initial);
+                    padding: 10px;
+                    padding-right: 0;
+                }
+            }
+
+            .catalog-list {
+                column-width: 310px;
+                column-gap: 0%;
+                column-count: 4;
+            }
+        }
+
+        .substrate {
+            height: 64px;
+        }
+
+        .popular {
+            &-wrap {
+                column-gap: 24px;
+                column-count: 3;
+            }
+
+            &-section {
+                padding: 20px;
+                padding-bottom: 8px;
+                margin-bottom: 24px;
+
+                .section-title {
+                    @include text(16px, 600, 24px, 2px, uppercase);
+                    width: 100%;
+                }
+
+                .section-group {
+
+                    .btn-stroke {
+                        margin-right: 12px;
+                        margin-bottom: 12px;
+                    }
+
+                }
+            }
+        }
+    }
+}

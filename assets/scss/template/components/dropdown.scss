@@ -1,0 +1,339 @@
+.page-wrapper {
+    .dropdown-default {
+        position: relative;
+    
+        .dropdown-btn {
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            height: 36px;
+            width: 100%;
+            background-color: $white;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+    
+            &:hover {
+                color: $black;
+    
+                .dropdown-btn-arrow {
+                    background: $btn_active_green;
+                }
+            }
+    
+            &-title {
+                @extend %m1024_mini_regular_12_16;
+                background-color: $white;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                height: 100%;
+                width: max-content;
+                min-width: 100%;
+                padding: 0 16px;
+                padding-right: 0;
+                border-radius: 4px 0px 0 4px;
+                overflow: hidden;
+                position: absolute;
+                text-align: left;
+                z-index: 0;
+    
+                &::after {
+                    content: '';
+                    background: linear-gradient(89.19deg, rgba(255, 255, 255, 0.5) 0.48%, #FFFFFF 84.01%);
+                    width: 20px;
+                    height: 100%;
+                    position: absolute;
+                    right: 36px;
+                }
+            }
+    
+            &-arrow {
+                background: $green;
+                width: 36px;
+                height: 36px;
+                border-radius: 0 4px 4px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                right: 0;
+                position: absolute;
+                z-index: 1;
+    
+                svg path {
+                    stroke: $white;
+                }
+    
+                svg.active {
+                    transition: .1s all;
+                    transform: rotate(180deg);
+                }
+            }
+    
+            &.disabled {
+                pointer-events: none;
+                
+                .dropdown-btn-arrow {
+                    background: $dark_grey;
+                    opacity: 0.3;
+                }
+            }
+        }
+    
+        .dropdown-list {
+            transition: initial;
+            padding: 10px 0;
+            background: $bg_white;
+            box-shadow: $plate_shadow;
+            border-radius: 8px;
+            position: absolute;
+            top: 40px;
+            display: none;
+            z-index: 2;
+            
+            &.scroll-init {
+                max-height: 336px;
+                padding: 8px 0;
+                width: 100%;
+
+                .simplebar-track.simplebar-vertical {
+                    top: 16px;
+                    bottom: 16px;
+                    height: calc(100% - 32px);
+                }
+            }
+    
+            .checkbox-default:not(:last-child) {
+                margin-bottom: 4px;
+            }
+    
+            .checkbox-default-label {
+                padding-right: 24px;
+            }
+        }
+    
+        .scrollbar-track-y {
+            height: calc(100% - 16px) !important;
+            top: 8px !important;
+            overflow: hidden !important;
+        }
+    
+        .scroll-content {
+            padding: 10px 0;
+        }
+    }
+
+    .dropdown-filter {
+        position: relative;
+        margin-bottom: 32px;
+    
+        &-btn {
+            background: transparent;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+    
+            .dropdown-title {
+                @extend %m1024_h4;
+                margin-right: 5px;
+
+                sup {
+                    transition: none;
+                }
+            }
+    
+            .dropdown-icon {
+                background-size: 16px;
+                background-position: 50%;
+                width: 16px;
+                height: 16px;
+                transition: .1s all;
+                position: relative;
+
+                &:before {
+                    content: '';
+                    background: url('~assets/img/icons/arrow-down.svg') no-repeat;
+                    width: 16px;
+                    height: 16px;
+                    background-size: cover;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 1;
+                    transition: $transition;
+                }
+
+                &:after {
+                    content: '';
+                    background: url('~assets/img/icons/arrow-down-darkgreen.svg') no-repeat;
+                    width: 16px;
+                    height: 16px;
+                    background-size: cover;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                    transition: $transition;
+                }
+            }
+
+            &:hover {
+                color: initial;
+    
+                .dropdown-title {
+                    color: $btn_active_green;
+                }
+
+                .dropdown-icon {
+                    &:before {
+                        opacity: 0;
+                    }
+
+                    &:after {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    
+        &.active {
+            margin-bottom: 48px;
+    
+            .dropdown-icon {
+                transform: rotate(180deg);
+            }
+        }
+    
+        &.many {
+            margin-bottom: 72px;
+        }
+    
+        &.hidden {
+            margin-bottom: 32px !important;
+        }
+    
+        &:last-child {
+           &.hidden {
+               margin-bottom: 0 !important;
+           }
+        }
+    
+        &-list {
+            transition: initial;
+            position: relative;
+            top: 8px;
+            right: 4px;
+            width: 100%;
+            display: flex;
+            flex-flow: wrap;
+            z-index: 2;
+    
+            .checkbox-btn-more {
+                @extend %m1024_mini_regular_12_16;
+                background: 0;
+                color: $green;
+                display: none;
+                align-items: center;
+                width: max-content;
+                position: absolute;
+                left: 4px;
+                bottom: -24px;
+                cursor: pointer;
+    
+                &:before {
+                    background: url('~assets/img/underline-green.svg') repeat;
+                }
+    
+                &:after {
+                    background: url('~assets/img/underline-darkgreen.svg') repeat;
+                }
+
+                &:hover {
+                    color: $btn_active_green;
+                }
+            }
+    
+            .checkbox-default {
+                width: 90px;
+                margin-right: 6px;
+    
+                &-label {
+                    padding: 6px 4px;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media screen and (min-width: 1440px) {
+    .page-wrapper {
+        .dropdown-default {
+            .dropdown-list {
+                min-width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper {
+        .dropdown-default {
+            .dropdown-btn {
+                height: 40px;
+                &-title {
+                    @include text(16px, 400, 20px, normal, initial);
+
+                    &:after {
+                        right: 40px;
+                    }
+                }
+    
+                &-arrow {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+    
+            .dropdown-list {
+                top: 44px;
+
+                &.scroll-init {
+                    max-height: 376px;
+                    padding: 0;
+                }
+            }
+        }
+    
+        .dropdown-filter {
+            .dropdown-title {
+                @include text(16px, 600, 24px, 2px, uppercase);
+            }
+            &-list {
+                top: 16px;
+                
+                .checkbox-default {
+                    width: 124px;
+                }
+                .checkbox-btn-more {
+                    @include text(14px, 400, 20px, 0.02em, initial);
+                    bottom: -36px;
+                }
+            }
+    
+            &.active {
+                margin-bottom: 54px;
+            }
+    
+            &.many {
+                margin-bottom: 90px;
+            }
+    
+            &.hidden {
+                margin-bottom: 40px !important;
+            }
+        }
+    }
+}

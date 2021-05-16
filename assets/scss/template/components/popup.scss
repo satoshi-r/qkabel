@@ -1,0 +1,139 @@
+.page-wrapper {
+    .popup {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 15;
+        transition: initial;
+    
+        &-overlay {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: $black;
+            opacity: 0.8;
+            top: 0;
+            left: 0;
+        }
+    
+        &-main {
+            width: 688px;
+            background: $bg_white;
+            padding: 40px;
+            padding-top: 24px;
+            box-shadow: $plate_shadow;
+            border-radius: 8px;
+            position: relative;
+            z-index: 16;
+        }
+    
+        &-close {
+            background: transparent;
+            top: 28px;
+            right: 20px;
+            position: absolute;
+    
+            &:hover {
+                svg path {
+                    fill: #DCDFE1;
+                }
+            }
+    
+            svg path {
+                fill: $black;
+            }
+        }
+    
+        &-left {
+            width: 350px;
+        }
+    
+        &-right {
+            width: 240px;
+        }
+    
+        &-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        &-title {
+            @extend %m1024_h1;
+            padding: 0;
+            margin-bottom: 8px;
+        }
+    
+        &-description {
+            @extend %m1024_regular_14_20;
+            margin-bottom: 16px;
+        }
+    
+        &-info {
+            margin-bottom: 8px;
+            display: flex;
+    
+            &-title {
+                @extend %m1024_bold_14_20;
+    
+                +span {
+                    @extend %m1024_bold_14_20;
+                }
+            }
+    
+            &-total {
+                @extend %m1024_big;
+                font-size: 28px;
+                margin-top: 12px;
+            }
+        }
+    
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper {
+        .popup {
+            &-main {
+                width: 870px;
+                padding-top: 32px;
+            }
+
+            &-left {
+                width: 450px;
+            }
+
+            &-right {
+                width: 300px;
+            }
+
+            &-title {
+                @include text(32px, 600, 40px, 6px, uppercase);
+            }
+
+            &-description {
+                @include text(16px, 400, 16px, normal, initial);
+            }
+
+            &-info {
+                @include text(16px, 400, 20px, normal, initial);
+
+                &-title {
+                    @include text(16px, 600, 24px, normal, initial);
+
+                    +span {
+                        @include text(16px, 600, 24px, normal, initial);
+                    }
+                }
+
+                &-total {
+                    @include text(32px, 600, 40px, 6px, uppercase);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,82 @@
+.page-wrapper.ui-page {
+
+    h2 {
+        margin-bottom: 15px;
+    }
+
+    .buttons-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 35px;
+
+        button {
+            margin-right: 25px;
+            margin-bottom: 25px;
+        }
+
+        a {
+            margin-right: 25px;
+        }
+    }
+
+    .checkbox-wrap {
+        display: flex;
+        margin-bottom: 25px;
+        width: 200px;
+        box-shadow: $plate_shadow;
+        background: $white;
+        padding: 20px;
+        border-radius: 4px;
+
+        .checkbox-default-group {
+            width: 160px;
+            
+        }
+
+    }
+
+    .dropdown-wrap {
+        display: flex;
+        justify-content: space-between;
+        width: 250px;
+        height: 200px;
+        background: $bg_light_blue;
+        padding: 15px 20px;
+        margin-bottom: 35px;
+
+        .dropdown-filter {
+            width: 200px;
+            margin-right: -250px;
+            margin-top: -15px;
+        }
+
+        .dropdown-default {
+            width: 100%;
+        }
+    }
+
+    .pagination-wrap {
+        margin-bottom: 35px;
+    }
+
+    .order-wrap {
+        margin-bottom: 35px;
+    }
+
+    .tables-wrap {
+        margin-bottom: 35px;
+
+        .table-1 {
+            margin-bottom: 35px;
+
+            .search-notfound {
+                display: block;
+            }
+        }
+
+        .table-2-wrap {
+            display: flex;
+        }
+    }
+}
+

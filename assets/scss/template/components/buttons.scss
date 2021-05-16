@@ -1,0 +1,352 @@
+.page-wrapper {
+    .btn {
+        @extend %m1024_h4;
+        color: $white;
+        background-color: $green;
+        border: 1px solid $green;
+        padding: 0px 16px;
+        height: 40px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+            background-color: $btn_active_green;
+            border-color: $btn_active_green;
+            color: $white;
+        }
+    }
+
+    .btn-transparent {
+        @extend .btn;
+        background-color: transparent;
+        border: 1px solid $green;
+        color: $green;
+
+        &:hover,
+        &:active {
+            color: $white;
+            background-color: $green;
+            border-color: $green;
+        }
+    }
+
+    .btn-mini-transparent {
+        @extend .btn-transparent;
+        height: 36px;
+    }
+
+    .btn-stroke {
+        @extend %m1024_regular_14_20;
+        color: $black;
+        background-color: transparent;
+        border: 1px solid $grey;
+        padding: 0px 16px;
+        height: 40px;
+        width: max-content;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+            color: $black;
+            border-color: $btn_active_red_light;
+        }
+    }
+
+    .btn-onplate {
+        @extend .btn;
+        border-radius: 0px 4px 4px 0px;
+        padding: 0px 42px;
+    }
+
+    .btn-disable {
+        @extend .btn;
+        background-color: rgba(179, 194, 204, 0.3);
+        border-color: rgba(179, 194, 204, 0.05);
+        cursor: auto !important;
+        pointer-events: none;
+
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: rgba(179, 194, 204, 0.3);
+        }
+    }
+
+    .btn-delete {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $red;
+        border-radius: 4px;
+        background-color: transparent;
+        cursor: pointer;
+
+        svg path {
+            fill: $red;
+        }
+
+        &:hover {
+            border-color: $btn_active_red_light;
+            background-color: $btn_active_red_light;
+
+            svg path {
+                fill: $white;
+            }
+        }
+
+        &.disabled {
+            background-color: $dark_grey;
+            border-color: $dark_grey;
+            opacity: 0.3;
+            cursor: initial;
+            pointer-events: none;
+
+            svg path {
+                fill: $white;
+            }
+
+            &:hover {
+                background-color: $dark_grey;
+
+
+                svg path {
+                    fill: $white;
+                }
+            }
+        }
+    }
+
+    .btn-dashed {
+        position: relative;
+
+        &:before {
+            content: '';
+            background: url('~assets/img/underline-black.svg') repeat;
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            left: 1px;
+            bottom: -2px;
+            opacity: 1;
+            transition: $transition;
+        }
+
+        &:after {
+            content: '';
+            background: url('~assets/img/underline-red.svg') repeat;
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            left: 1px;
+            bottom: -2px;
+            opacity: 0;
+            transition: $transition;
+        }
+
+        &:hover {
+            &:before {
+                opacity: 0;
+            }
+
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+
+    .btn-search {
+        @extend .btn;
+        border-radius: 0px 4px 4px 0px;
+        padding: 0;
+        height: 40px;
+        width: 40px;
+
+        svg path {
+            fill: $white;
+        }
+    }
+
+    .btn-more {
+        @extend .btn;
+        width: 944px;
+        color: $black;
+        background-color: rgba(179, 194, 204, 0.3);
+        border: 0;
+        width: 100%;
+        margin: 16px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            color: $black;
+            background-color: rgba(179, 194, 204, 0.7);
+            border: 0;
+        }
+
+        // лоадер
+        &.loader {
+            pointer-events: none;
+
+            &:hover {
+                background-color: rgba(179,194,204,.3);
+            }
+
+            .btn-more-title {
+                display: none;
+            }
+
+            .btn-more-loader {
+                display: block;
+            }
+
+            @keyframes loadbars {
+                0% {
+                    height: 10px;
+                    margin-top: 3px;
+                }
+
+                50% {
+                    height: 16px;
+                    margin-top: 0px;
+                }
+
+                100% {
+                    height: 10px;
+                    margin-top: 3px;
+                }
+            }
+
+            li {
+                background-color: $dark_grey;
+                width: 4px;
+                height: 4px;
+                float: right;
+                margin-right: 2px;
+
+            }
+
+            li:first-child {
+                animation: loadbars 1.6s cubic-bezier(0.645, 0.045, 0.355, 1) infinite 0s;
+            }
+
+            li:nth-child(2) {
+                animation: loadbars 1.6s ease-in-out infinite -0.2s;
+            }
+
+            li:nth-child(3) {
+                animation: loadbars 1.6s ease-in-out infinite -0.4s;
+            }
+
+            li:nth-child(4) {
+                animation: loadbars 1.6s ease-in-out infinite -0.6s;
+            }
+        }
+    }
+
+    .btn-sort {
+        display: flex;
+        align-items: center;
+        background: transparent;
+
+        &-title {
+            @extend %m1024_mini_bold_12_16;
+            color: $black;
+            position: relative;
+        }
+
+        &-arrow {
+            display: none;
+            opacity: 0;
+            background: url('~assets/img/icons/arrow-down-8.svg') no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin-left: 8px;
+            width: 8px;
+            height: 8px;
+        }
+
+        &.active {
+            .btn-sort-title {
+                color: $red;
+                border-color: $red;
+
+                &:before {
+                    opacity: 0;
+                }
+
+                &:after {
+                    opacity: 1;
+                }
+            }
+
+            .btn-sort-arrow {
+                display: block;
+                opacity: 1;
+            }
+
+            &.asc {
+                .btn-sort-arrow {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        &.disabled {
+            cursor: pointer;
+            pointer-events: none;
+        }
+
+        &:hover {
+            .btn-sort-title {
+                color: $btn_active_red_light;
+                border-color: $btn_active_red_light;
+
+                &:before {
+                    opacity: 0;
+                }
+
+                &:after {
+                    opacity: 1;
+                }
+            }
+        }
+
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper {
+        .btn {
+            @include text(14px, 600, 20px, 0.12em, uppercase);
+            height: 44px;
+        }
+
+        .btn-mini-transparent {
+            height: 40px;
+        }
+
+        .btn-stroke {
+            @include text(16px, 400, 20px, normal, initial);
+            height: 44px;
+        }
+
+        .btn-sort {
+            &-title {
+                @include text(14px, 600, 20px, 0.02em, initial);
+            }
+        }
+
+        .btn-delete {
+            width: 44px;
+            height: 44px;
+        }
+    }
+}

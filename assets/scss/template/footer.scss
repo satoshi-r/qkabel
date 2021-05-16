@@ -1,0 +1,51 @@
+.page-wrapper {
+    .footer {
+        background-color: $black;
+        color: $white;
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        bottom: 0;
+    
+        .container {
+            display: flex;
+            align-items: center;
+        }
+    
+        &-policy {
+            border-bottom: 1px solid $white;
+            color: $white;
+            margin-left: 16px;
+            margin-top: 1px;
+    
+            &:hover {
+                color: $green;
+                border-color: $green;
+            }
+        }
+    
+        &-developers {
+            @extend %m1024_h4;
+            color: $white;
+            margin-left: auto;
+    
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper {
+        .footer {
+            @include text(14px, 400, 20px, 0.02em, initial);
+            padding: 22px 0;
+    
+            &-developers {
+                @include text(14px, 600, 20px, 0.12em, uppercase);
+            }
+        }
+    }
+}

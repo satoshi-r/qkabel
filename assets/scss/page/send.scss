@@ -1,0 +1,47 @@
+.page-wrapper.send-page {
+    .content-items {
+        display: none;
+    }
+
+    h1 {
+        @extend %m1024_h3;
+        width: 250px;
+        padding-top: 32px;
+        margin-bottom: 24px;
+    }
+
+    .send-text {
+        width: 490px;
+
+        a {
+
+            color: $green;
+            border-bottom: 1px solid $green;
+        }
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper.send-page {
+
+        h1 {
+            @include text(32px, 600, 40px, 6px, uppercase);
+            margin-bottom: 32px;
+            width: 540px;
+        }
+
+        .send-text {
+            @include text(16px, 400, 24px, normal, initial);
+            width: 470px;
+
+            a {
+                @include text(16px, 400, 24px, normal, initial);
+
+                &:hover {
+                    color: $btn_active_green;
+                    border-color: $btn_active_green;
+                }
+            }
+        }
+    }
+}

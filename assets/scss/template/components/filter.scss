@@ -1,0 +1,161 @@
+.page-wrapper {
+    .filter {
+        width: 224px;
+        position: sticky;
+        top: 90px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background: $white;
+        overflow: hidden;
+        flex-shrink: 0;
+        max-height: 74vh;
+        height: min-content;
+
+        &-top {
+            border-radius: 8px 8px 0px 0px;
+            background: $dark_grey;
+            height: 52px;
+            width: 100%;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &-title {
+            @extend %m1024_h2;
+            color: $white;
+        }
+
+        &-clear {
+            @extend %m1024_mini_regular_12_16;
+            background: 0;
+            color: $black;
+
+            &.disabled {
+                pointer-events: none;
+                opacity: 0.6;
+
+                &:before,
+                &:after {
+                    opacity: 0;
+                }
+            }
+
+            &:before {
+                background: url('~assets/img/underline-black.svg') repeat;
+            }
+
+            &:after {
+                background: url('~assets/img/underline-green.svg') repeat;
+            }
+
+            &:hover {
+                color: $btn_active_green;
+            }
+        }
+
+        &-wrap {
+            overflow: hidden;
+            margin: 24px 0;
+            position: relative;
+
+            .scroll-content,
+            .scrollbar-thumb {
+                transition: transform .15s linear;
+            }
+        }
+
+        &-main {
+            padding: 0 16px;
+            border-radius: 0 0 8px 8px;
+            width: 100%;
+            background: $white;
+            position: relative;
+            height: max-content;
+            max-height: calc(74vh - 100px);
+
+            .simplebar-content {
+                transition: none;
+            }
+
+            .simplebar-track.simplebar-horizontal {
+                opacity: 0;
+            }
+        }
+
+        &-checkbox-alone {
+            margin-bottom: 26px;
+            margin-top: -6px;
+            position: relative;
+
+            &:before {
+                top: -10px !important;
+            }
+
+            .checkbox-default-label {
+                padding-left: 4px;
+                margin-left: -4px;
+            }
+        }
+
+        .filter-checkbox-alone,
+        .dropdown-filter:not(:first-child) {
+            &:before {
+                content: '';
+                position: absolute;
+                height: 1px;
+                background: $grey;
+                top: -16px;
+                width: calc(100% + 32px);
+                margin: 0 -16px;
+            }
+        }
+
+        .dropdown-filter.active {
+            &:last-child {
+                margin-bottom: 32px;
+            }
+        }
+
+
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .page-wrapper {
+        .filter {
+            width: 338px;
+            top: 100px;
+
+            &-title {
+                @include text(16px, 600, 24px, 2px, uppercase);
+            }
+
+            &-clear {
+                @include text(14px, 400, 20px, 0.02em, initial);
+            }
+
+            &-main {
+                padding: 0 24px;
+            }
+
+            .filter-checkbox-alone,
+            .dropdown-filter:not(:first-child) {
+                &:before {
+                    top: -20px;
+                    width: calc(100% + 48px);
+                    margin: 0 -24px;
+                }
+            }
+
+            .filter-checkbox-alone {
+                margin-bottom: 34px;
+
+                &::before {
+                    top: -16px !important;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,157 @@
+// OTHER
+
+$transition: all .4s ease;
+$plate_shadow: 0px 10px 70px rgba(0, 0, 0, 0.08);
+
+// COLORS
+
+$black: #000000;
+$white: #FFFFFF;
+$green: #75CDB3;
+$red: #E88073;
+$blue: #060D3F;
+$grey: #ECECEC;
+$dark_grey: #B3C2CC;
+
+// btn active
+$btn_active_green: #349F7F;
+$btn_active_red: #D93B27;
+$btn_active_red_light: #E88073;
+
+// bg
+$bg_white: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+#FFFFFF;
+$bg_light_blue: #F5F8FA;
+
+
+// MIXINS
+
+@mixin text($size, $weight, $line-height, $letter-spacing, $text-transform) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+    text-transform: $text-transform;
+}
+
+
+// TEXT
+
+// 1024+
+%m1024_h1 {
+    @include text(24px, 600, 40px, 4px, uppercase);
+}
+
+%m1024_h2 {
+    @include text(14px, 600, 20px, 2px, uppercase);
+}
+
+%m1024_h3 {
+    @include text(16px, 600, 20px, 2px, uppercase);
+}
+
+%m1024_h4 {
+    @include text(12px, 600, 16px, 2px, uppercase);
+}
+
+%m1024_regular_14_20 {
+    @include text(14px, normal, 20px, normal, initial);
+}
+
+%m1024_bold_14_20 {
+    @include text(14px, 600, 20px, normal, initial);
+}
+
+%m1024_bold_14_20_4 {
+    @include text(14px, 600, 20px, 0.04em, initial);
+}
+
+%m1024_bold_14_16 {
+    @include text(14px, 600, 16px, normal, initial);
+}
+
+%m1024_mini_regular_12_16 {
+    @include text(12px, normal, 16px, normal, initial);
+}
+
+%m1024_mini_bold_12_16 {
+    @include text(12px, 600, 16px, normal, initial);
+}
+
+%m1024_mini_bold_10_16 {
+    @include text(10px, 600, 16px, normal, initial);
+}
+
+%m1024_big {
+    @include text(32px, 600, 40px, 4px, uppercase);
+}
+
+// 1500+
+%m1500_h1 {
+    @include text(32px, 600, 40px, 6px, uppercase);
+}
+
+%m1500_h2 {
+    @include text(20px, 600, 24px, 2px, uppercase);
+}
+
+%m1500_h3 {
+    @include text(16px, 600, 24px, 2px, uppercase);
+}
+
+%m1500_introduction {
+    @include text(18px, 600, 24px, normal, initial);
+}
+
+%m1500_long {
+    @include text(16px, 400, 24px, normal, initial);
+}
+
+%m1500_long_bold {
+    @include text(16px, 600, 24px, normal, initial);
+}
+
+%m1500_stroke {
+    @include text(16px, 400, 20px, normal, initial);
+}
+
+%m1500_stroke_bold {
+    @include text(16px, 600, 20px, normal, initial);
+}
+
+%m1500_btn_regular {
+    @include text(16px, 400, 20px, 0.04em, uppercase);
+}
+
+%m1500_btn_bold {
+    @include text(14px, 600, 20px, 0.12em, uppercase);
+}
+
+%m1500_14_20_regular {
+    @include text(14px, 400, 20px, 0.02em, initial);
+}
+
+%m1500_14_20_bold {
+    @include text(14px, 600, 20px, 0.02em, initial);
+}
+
+%m1500_12_16_regular {
+    @include text(12px, 400, 16px, normal, initial);
+}
+
+%m1500_12_16_bold {
+    @include text(12px, 600, 16px, normal, initial);
+}
+
+%m1500_price_big {
+    @include text(36px, 600, 40px, 4px, initial);
+}
+
+%m1500_price_big {
+    @include text(36px, 600, 40px, 4px, uppercase);
+}
+
+%m1500_price_small {
+    @include text(24px, 600, 20px, 2px, uppercase);
+}

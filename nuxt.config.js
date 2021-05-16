@@ -4,9 +4,9 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'qkabel',
+    title: 'QKabel',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'ru',
     },
     meta: [
       { charset: 'utf-8' },
@@ -17,13 +17,15 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['~assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
+  loading: { color: '#75CDB3' },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -35,7 +37,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    'nuxt-svg-loader'
   ],
+
+  styleResources: {
+    scss: ["./assets/scss/*.scss"]
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
