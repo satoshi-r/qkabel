@@ -112,81 +112,9 @@
       <transition name="fade">
         <div v-if="isShowMenu" class="header-catalog">
           <ul class="container">
-            <li class="header-catalog-item">
-              <a href="">Силовые с бумажной изоляцией</a>
+            <li v-for="item of catalog" :key="item" class="header-catalog-item">
+              <nuxt-link :to="item.link">{{ item.title }}</nuxt-link>
             </li>
-            <li class="header-catalog-item">
-              <a href="">Силовые с пластмассовой изоляцией</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Силовые с резиновой изоляцией</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Антивибрационные</a></li>
-            <li class="header-catalog-item">
-              <a href="">Высоковольтные малой мощности</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Городские телефонные</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Для аэродромных огней</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Для компьютерных сетей</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Для сигнализации и блокировки</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Для промышленной автоматизациии систем управления</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Коаксиальные</a></li>
-            <li class="header-catalog-item"><a href="">Контрольные</a></li>
-            <li class="header-catalog-item"><a href="">Магистральные</a></li>
-            <li class="header-catalog-item">
-              <a href="">Кабели связи телефонные шахтные</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Шахтные и экскаваторные</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Судовые</a></li>
-            <li class="header-catalog-item"><a href="">Управления</a></li>
-            <li class="header-catalog-item">
-              <a href="">Кабели связи станционные</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Проводного вещания</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Нефтепогружные</a></li>
-            <li class="header-catalog-item">
-              <a href="">Местной связи высокочастотные</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Для систем пожарной и охранной сигнализации</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Оптический кабель</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Пневмокабель</a></li>
-            <li class="header-catalog-item">
-              <a href="">Радиочастотный кабель</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Провода</a></li>
-            <li class="header-catalog-item"><a href="">Обмоточные</a></li>
-            <li class="header-catalog-item"><a href="">Бортовые</a></li>
-            <li class="header-catalog-item"><a href="">Геофизические</a></li>
-            <li class="header-catalog-item">
-              <a href="">Для медицинских приборов</a>
-            </li>
-            <li class="header-catalog-item">
-              <a href="">Для подвижного состава</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Монтажные</a></li>
-            <li class="header-catalog-item"><a href="">Термостойкие</a></li>
-            <li class="header-catalog-item">
-              <a href="">Кабели нагревательные и провода термопарные</a>
-            </li>
-            <li class="header-catalog-item"><a href="">Шнуры связи</a></li>
           </ul>
         </div>
       </transition>
@@ -208,11 +136,17 @@ export default {
     CloseSvg,
   },
 
+  async fetch() {
+    const data = await fetch('http://localhost:3000/api/catalog');
+    this.catalog = await data.json();
+  },
+
   data() {
     return {
       isShowMenu: false,
       isSearchFocus: false,
       searchValue: "",
+      catalog: []
     };
   },
 

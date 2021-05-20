@@ -20,7 +20,9 @@ export default {
   css: ['~assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/masonry.js'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -38,7 +40,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
-    'nuxt-svg-loader'
+    'nuxt-svg-loader',
+    'nuxt-express-module'
   ],
 
   styleResources: {
