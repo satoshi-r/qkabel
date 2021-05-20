@@ -99,7 +99,7 @@
 }
 
 @media screen and (min-width: 1500px) {
-    .page-wrapper.main-page {
+    .page-wrapper {
 
         h2 {
             @include text(32px, 600, 40px, 6px, uppercase);
@@ -133,10 +133,6 @@
         }
 
         .popular {
-            &-wrap {
-                column-gap: 24px;
-                column-count: 3;
-            }
 
             &-section {
                 padding: 20px;

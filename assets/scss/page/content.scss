@@ -1,10 +1,14 @@
-.page-wrapper.content-page {
+.page-wrapper {
     @include text(14px, normal, 20px, normal, initial);
 
     .main-container {
         display: flex;
         position: relative;
         justify-content: space-between;
+    }
+
+    .content-title {
+      margin-bottom: 16px;
     }
 
     .sidebar {
@@ -80,7 +84,7 @@
 }
 
 @media screen and (min-width: 1500px) {
-    .page-wrapper.content-page {
+    .page-wrapper {
         @include text(16px, 400, 24px, normal, initial);
 
         .content-container {

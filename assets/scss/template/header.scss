@@ -1,10 +1,11 @@
 .page-wrapper {
     .header {
         width: 100%;
-        position: absolute;
+        position: sticky;
         top: 0;
         left: 0;
         z-index: 10;
+        margin-top: -65px;
 
         .container {
             display: flex;
@@ -16,6 +17,10 @@
         &-top {
             background-color: $black;
             height: 36px;
+            width: 100%;
+            top: -35px;
+            left: 0;
+            position: absolute;
         }
 
         &-menu {
@@ -83,6 +88,8 @@
             padding: 12px 0;
             background-color: $blue;
             width: 100%;
+            position: sticky;
+            top: 36px;
 
             .container {
                 display: flex;
@@ -227,6 +234,7 @@
             transition: all ease .4s;
             padding-top: 16px;
             padding-bottom: 32px;
+            margin-top: -36px;
 
             .container {
                 display: block;
@@ -264,8 +272,11 @@
 @media screen and (min-width: 1500px) {
     .page-wrapper {
         .header {
+            margin-top: -76px;
+
             &-top {
                 height: 44px;
+                top: -44px;
             }
 
             &-contacts {
@@ -314,6 +325,7 @@
                 top: 120px;
                 padding-top: 32px;
                 padding-bottom: 40px;
+                margin-top: -44px;
 
                 .container {
                     column-width: 314px;

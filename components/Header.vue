@@ -195,10 +195,10 @@
 </template>
 
 <script>
-import MenuSvg from "@/assets/img/icons/menu.svg"
-import CloseSvg from "@/assets/img/icons/close-12.svg"
-import SearchSvg from "@/assets/img/icons/search-24.svg"
-import LogoSvg from "@/assets/img/logo.svg"
+import MenuSvg from "@/assets/img/icons/menu.svg";
+import CloseSvg from "@/assets/img/icons/close-12.svg";
+import SearchSvg from "@/assets/img/icons/search-24.svg";
+import LogoSvg from "@/assets/img/logo.svg";
 
 export default {
   components: {
@@ -213,47 +213,49 @@ export default {
       isShowMenu: false,
       isSearchFocus: false,
       searchValue: "",
-    }
+    };
   },
 
   mounted() {
     document.addEventListener("keydown", (evt) => {
-      if (evt.keyCode !== 27 && !this.isShowMenu) return
-      this.closeMenu()
-    })
+      if (evt.keyCode !== 27 && !this.isShowMenu) return;
+      this.closeMenu();
+    });
 
     document.addEventListener("click", (evt) => {
-      if (evt.target.closest([".header-btn", ".header-catalog"])) return
-      this.closeMenu()
-    })
+      if (evt.target.closest([".header-btn", ".header-catalog"])) return;
+      this.closeMenu();
+    });
   },
 
   methods: {
     toggleMenu(evt) {
-      evt.target.classList.toggle("active")
+      evt.target.classList.toggle("active");
       evt.target.classList.contains("active")
         ? (this.isShowMenu = true)
-        : (this.isShowMenu = false)
+        : (this.isShowMenu = false);
     },
 
     closeMenu() {
-      this.isShowMenu = false
-      this.$refs.headerBtn.classList.remove("active")
+      this.isShowMenu = false;
+      this.$refs.headerBtn.classList.remove("active");
     },
+
+    changeInputPlaceholder() {
+      (this.isSearchFocus)
+        ? (this.$refs.searchPlaceholder.style.opacity = 0.5)
+        : (this.$refs.searchPlaceholder.style.opacity = "");
+    }
   },
 
   watch: {
-    isSearchFocus(val) {
-      if (val) {
-        this.$refs.searchPlaceholder.style.opacity = 0.5
-      } else {
-        this.$refs.searchPlaceholder.style.opacity = ""
-      }
+    isSearchFocus() {
+      this.$nextTick().then(this.changeInputPlaceholder);
     },
 
-    // searchValue(val) {
-
-    // }
+    searchValue() {
+      this.$nextTick().then(this.changeInputPlaceholder);
+    }
   },
-}
+};
 </script>
