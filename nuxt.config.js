@@ -27,7 +27,7 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  loading: { color: '#75CDB3' },
+  loading: { color: '#75CDB3', height: 4 },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

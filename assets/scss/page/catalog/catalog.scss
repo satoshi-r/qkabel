@@ -1,4 +1,4 @@
-.page-wrapper.catalog {
+.page-wrapper {
     .table-wrap {
         display: flex;
     }
@@ -39,10 +39,39 @@
             }
         }
     }
+
+    @keyframes loading {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .6;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .loading {
+        &-item {
+            height: 48px;
+            width: 100%;
+            background-color: rgba(179, 194, 204, 0.15);
+            border-radius: 4px;
+            margin-top: 8px;
+            animation: loading .4s infinite ease;
+        }
+    }
 }
 
 @media screen and (min-width: 1500px) {
-    .page-wrapper.catalog {
+    .page-wrapper {
         .catalog-main {
             padding: 32px 40px;
 
