@@ -1,6 +1,6 @@
 <template>
   <div class="catalog container content-items">
-    <h1 class="content-title">{{ $route.params.title }}</h1>
+    <h1 class="content-title">{{ $route.params.slug.split("-").join(" ") }}</h1>
     <div class="main-wrapper">
       <div class="table table-1">
         <div class="filter-nav">
@@ -766,19 +766,12 @@
 
         <!-- таблица -->
         <div class="table-container">
-          <div class="loading" v-if="loading">
-            <div
-              v-for="(item, idx) in calcCountLoaderItems"
-              :key="idx"
-              class="loading-item"
-            ></div>
-          </div>
           <nuxt-link
-            v-for="group of displayedGroups"
-            :key="group.id"
+            v-for="(group, idx) of groups"
+            :key="idx"
             :to="{
-              name: `store-products-id`,
-              params: { id: group.id, title: group.title },
+              name: `store-products-group-id-slug`,
+              params: { id: group.id, group: $route.params.id, slug: group.title.toLowerCase().split(' ').join('-') },
             }"
             class="table-item"
           >
@@ -792,138 +785,28 @@
         </div>
       </div>
 
-      <button v-if="page !== pages.length" @click="loadMore" class="btn-more">
-        <div class="btn-more-title">показать еще</div>
-      </button>
-
-      <div class="pagination-wrap">
-        <div class="pagination">
-          <button
-            v-if="page !== 1"
-            @click="page !== 1 ? page-- : null"
-            class="pagination-back"
-          >
-            <svg
-              width="8"
-              height="8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5.5.5L2 4l3.5 3.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <div>Назад</div>
-          </button>
-          <div class="pagination-list">
-            <button
-              v-for="number of pages"
-              :key="number"
-              href="#"
-              @click="page = number"
-              :class="page == number ? 'active' : ''"
-              class="pagination-item"
-            >
-              {{ number }}
-            </button>
-          </div>
-          <button
-            v-if="page !== pages.length"
-            @click="page !== pages.length ? page++ : null"
-            class="pagination-next"
-          >
-            <div>Вперед</div>
-            <svg
-              width="8"
-              height="9"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2.5 7.611l3.5-3.5-3.5-3.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <div class="pagination-watched">
-          Вы посмотрели {{ viewedGroups }} из {{ groups.length }} разделов
-        </div>
-      </div>
+      <Pagination :list="groups"/>
     </div>
   </div>
 </template>
 
 <script>
+import Pagination from '@/components/Pagination';
+
 export default {
-  data() {
-    return {
-      groups: [],
-      loading: true,
-      pages: [],
-      page: 1,
-      perPage: 60,
-      isLoadMore: false,
-    };
+  components: {
+    Pagination,
   },
 
-  async fetch() {
-    const data = await fetch(
-      `http://localhost:3000/api/groups?id=${this.$route.params.id}`
-    );
-    this.groups = await data.json();
-  },
-
-  methods: {
-    setPages() {
-      const numberOfPages = Math.ceil(this.groups.length / this.perPage);
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index);
-      }
-    },
-
-    paginate(groups) {
-      const page = this.page;
-      const perPage = this.perPage;
-      const from = (this.isLoadMore) ? 1 : page * perPage - perPage;
-      const to = this.isLoadMore ? page * perPage : page * perPage + from;
-      console.log(from, to);
-      this.isLoadMore = false;
-      return groups.slice(from, to);
-    },
-
-    loadMore() {
-      this.isLoadMore = true;
-      this.page++;
-      console.log(this.displayedGroups.length);
-    },
+  async fetch({store, params}) {
+    await store.dispatch('list/fetch', params);
   },
 
   computed: {
-    calcCountLoaderItems() {
-      const count = parseInt((document.body.clientHeight - 344) / (48 + 4));
-      return Array(count).fill();
-    },
-
-    displayedGroups() {
-      return this.paginate(this.groups);
-    },
-
-    viewedGroups() {
-      const res = (this.page + 1) * this.perPage - this.perPage;
-      return res >= this.groups.length ? this.groups.length : res;
-    },
-  },
-
-  watch: {
     groups() {
-      this.loading = false;
-      this.setPages();
+      return this.$store.getters["list/getList"];
     },
   },
+
 };
 </script>

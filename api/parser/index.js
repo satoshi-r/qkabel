@@ -26,7 +26,7 @@ class Parser {
     });
   }
 
-  async getPagination(url) {
+  async _getPagination(url) {
     return await this._request(url, ($, res) => {
       res.push($('.pagination-item').length);
     });
@@ -97,7 +97,7 @@ class Parser {
     }
 
     for (let i = 0; i < links.length; i++) {
-      const paginationLength = await this.getPagination(this.url.slice(0, -1) + links[i]);
+      const paginationLength = await this._getPagination(this.url.slice(0, -1) + links[i]);
 
       for (let index = 0; index < paginationLength[0]; index++) {
         if (index == 0) {
@@ -135,7 +135,7 @@ class Parser {
             screen_section: +$('.company_product').find('h4').siblings('ul').find('li').eq(3).text().match(/\d+/g),
           },
 
-          description: $('.company_product').find('div[itemprop=description]').html().trim()
+          // description: $('.company_product').find('div[itemprop=description]').html().trim()
         });
       });
     }
@@ -160,7 +160,7 @@ class Parser {
     }
 
     for (let i = 0; i < links.length; i++) {
-      const paginationLength = await this.getPagination(this.url.slice(0, -1) + links[i]);
+      const paginationLength = await this._getPagination(this.url.slice(0, -1) + links[i]);
       for (let index = 0; index < paginationLength[0]; index++) {
         if (index == 0) {
           try {
