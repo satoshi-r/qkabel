@@ -16,6 +16,7 @@
     "cherio": "^1.0.0-rc.2",
     "core-js": "^3.9.1",
     "express": "^4.17.1",
+    "mongoose": "^5.12.12",
     "nuxt": "^2.15.3",
     "unirest": "^0.6.0",
     "vue-masonry-css": "^1.0.3"
