@@ -52,7 +52,6 @@ export const getters = {
   },
 
   getTitle(state) {
-    console.log(state.title);
     return state.title;
   }
 

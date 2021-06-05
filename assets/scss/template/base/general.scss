@@ -253,7 +253,16 @@ body {
       opacity: 1;
     }
   }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .4s ease;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 }
+
+
 
 @media screen and (max-width: 1023px) {
   body {

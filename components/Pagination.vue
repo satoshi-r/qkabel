@@ -8,7 +8,7 @@
       <div class="btn-more-title">показать еще</div>
     </button>
 
-    <div v-if="pages.length > 0" class="pagination-wrap">
+    <div v-if="pages.length > 1" class="pagination-wrap">
       <div class="pagination">
         <button
           v-if="page !== 1"
@@ -63,7 +63,7 @@
       </div>
 
       <div class="pagination-watched">
-        Вы посмотрели {{ viewed }} из {{ list.length }} разделов
+        Вы посмотрели {{ viewed }} из {{ filteredList ? filteredList.length : list.length }} разделов
       </div>
     </div>
   </div>
@@ -88,17 +88,29 @@ export default {
       isLoadMore: false,
       pages: [],
       page: 1,
+      filteredList: null
     };
   },
 
   mounted() {
     this.setPages();
-    this.updateDisplayedlist();
+    this.updateDisplayedList();
+
+    this.$bus.on("onFilterSearch", (list) => {
+      this.filteredList = list;
+      this.setPages();
+      this.updateDisplayedList();
+    });
   },
 
   methods: {
     setPages() {
-      const numberOfPages = Math.ceil(this.list.length / this.perPage);
+      this.pages = [];
+      this.page = 1;
+
+      const listLength = this.filteredList ? this.filteredList.length : this.list.length;
+      const numberOfPages = Math.ceil(listLength / this.perPage);
+
       for (let index = 1; index <= numberOfPages; index++) {
         this.pages.push(index);
       }
@@ -118,25 +130,26 @@ export default {
       this.page++;
     },
 
-    updateDisplayedlist() {
+    updateDisplayedList() {
       this.$store.dispatch('list/updateDisplayedList', this.displayedList);
     }
   },
 
   computed: {
     displayedList() {
-      return this.paginate(this.list);
+      return this.paginate(this.filteredList || this.list);
     },
 
     viewed() {
+      const list = this.filteredList || this.list;
       const res = (this.page + 1) * this.perPage - this.perPage;
-      return res >= this.list.length ? this.list.length : res;
+      return res >= list.length ? list.length : res;
     },
   },
 
   watch: {
     page() {
-      this.updateDisplayedlist();
+      this.updateDisplayedList();
     },
   },
 };

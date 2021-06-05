@@ -91,6 +91,7 @@
         flex-shrink: 0;
 
         svg {
+          transition: $transition;
           path {
             fill: #808080;
           }
@@ -117,7 +118,7 @@
           padding: 0 16px;
           top: 6px;
           cursor: text;
-          transition: initial;
+          transition: $transition;
         }
 
 
@@ -130,8 +131,7 @@
           position: absolute;
           top: 6px;
           right: 16px;
-          display: none;
-          transition: initial;
+          transition: $transition;
 
           &:hover {
             svg path {
@@ -216,7 +216,6 @@
       padding-top: 16px;
       padding-left: 16px;
       border-top: 1px solid #dcdfe1;
-      display: none;
     }
   }
 
