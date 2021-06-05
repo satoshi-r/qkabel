@@ -1,42 +1,59 @@
 export const state = () => ({
-    list: [],
-    displayedList: [],
+  title: "",
+  list: [],
+  displayedList: []
 });
 
 export const actions = {
-    async fetch({commit}, {id}) {
-        const data = await fetch(
-          `http://localhost:3000/api/groups?id=${id}`
-        );
-        const list = await data.json();
-        commit('setList', list);
-    },
+  async fetch({ commit }, { groups }) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/groups/?link=${groups}`);
+      const data = await response.json();
+      const list = data[1];
 
-    updateList({commit}, list) {
-        commit('setList', list);
-    },
+      commit("setTitle", data[0]);
+      commit("setList", list);
+      commit("setDisplayedList", list);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
-    updateDisplayedList({commit}, list) {
-        commit('setDisplayedList', list);
-    },
+  updateList({ commit }, list) {
+    commit("setList", list);
+  },
+
+  updateDisplayedList({ commit }, list) {
+    commit("setDisplayedList", list);
+  }
 };
 
 export const mutations = {
-    setList(state, list) {
-        state.List = list;
-    },
+  setTitle(state, title) {
+    state.title = title;
+  },
 
-    setDisplayedList(state, list) {
-        state.displayedList = list;
-    }
+  setList(state, list) {
+    state.list = list;
+  },
+
+  setDisplayedList(state, list) {
+    state.displayedList = list;
+  }
 };
 
 export const getters = {
-    getDisplayedList(state) {
-        return state.displayedList;
-    },
+  getDisplayedList(state) {
+    return state.displayedList;
+  },
 
-    getList(state) {
-        return state.List;
-    }
+  getList(state) {
+    return state.list;
+  },
+
+  getTitle(state) {
+    console.log(state.title);
+    return state.title;
+  }
+
 };

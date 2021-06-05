@@ -93,6 +93,7 @@ export default {
 
   mounted() {
     this.setPages();
+    this.updateDisplayedlist();
   },
 
   methods: {
@@ -116,6 +117,10 @@ export default {
       this.isLoadMore = true;
       this.page++;
     },
+
+    updateDisplayedlist() {
+      this.$store.dispatch('list/updateDisplayedList', this.displayedList);
+    }
   },
 
   computed: {
@@ -131,7 +136,7 @@ export default {
 
   watch: {
     page() {
-      this.$store.dispatch('list/updateDisplayedList', this.displayedList);
+      this.updateDisplayedlist();
     },
   },
 };

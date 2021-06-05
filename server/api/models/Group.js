@@ -2,6 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const schema = new Schema({
   id: { type: Number },
+  parentId: {
+    type: Schema.Types.ObjectId,
+    ref: "Group",
+  },
+  parentLink: { type: String },
   link: { type: String },
   name: { type: String },
   values: {
@@ -11,9 +16,9 @@ const schema = new Schema({
     protect: { type: String },
   },
   products: {
-    ref: "products",
-    type: Schema.Types.ObjectId
-  }
+    ref: "Product",
+    type: Schema.Types.ObjectId,
+  },
 });
 
 module.exports = model("Group", schema);

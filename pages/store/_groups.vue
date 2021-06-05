@@ -1,6 +1,6 @@
 <template>
   <div class="catalog container content-items">
-    <h1 class="content-title">{{ $route.params.slug.split("-").join(" ") }}</h1>
+    <h1 class="content-title">{{ title }}</h1>
     <div class="main-wrapper">
       <div class="table table-1">
         <div class="filter-nav">
@@ -766,47 +766,52 @@
 
         <!-- таблица -->
         <div class="table-container">
-          <nuxt-link
-            v-for="(group, idx) of groups"
+          <a
+            href="#"
+            v-for="(group, idx) of displayedGroups"
             :key="idx"
-            :to="{
-              name: `store-products-group-id-slug`,
-              params: { id: group.id, group: $route.params.id, slug: group.title.toLowerCase().split(' ').join('-') },
-            }"
             class="table-item"
           >
-            <div class="item-name">{{ group.title }}</div>
+            <div class="item-name">{{ group.name }}</div>
             <div class="item-core">{{ group.values.core }}</div>
             <div class="item-isolation">{{ group.values.execution }}</div>
             <div class="item-execution">{{ group.values.insulation }}</div>
             <div class="item-cover">{{ group.values.protect }}</div>
-          </nuxt-link>
+          </a>
           <div class="search-notfound">Ничего не найдено</div>
         </div>
       </div>
 
-      <Pagination :list="groups"/>
+      <Pagination :list="groups" />
     </div>
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/Pagination';
+import Pagination from "@/components/Pagination";
 
 export default {
   components: {
-    Pagination,
+    Pagination
   },
 
-  async fetch({store, params}) {
-    await store.dispatch('list/fetch', params);
+  async fetch({ store, params }) {
+    await store.dispatch("list/fetch", params);
   },
 
   computed: {
     groups() {
       return this.$store.getters["list/getList"];
     },
-  },
+
+    title() {
+      return this.$store.getters["list/getTitle"];
+    },
+
+    displayedGroups() {
+      return this.$store.getters["list/getDisplayedList"];
+    }
+  }
 
 };
 </script>

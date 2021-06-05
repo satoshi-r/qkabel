@@ -11,10 +11,6 @@ const schema = new Schema({
   },
   link: {
     type: String,
-  },
-  groups: {
-    ref: 'groups',
-    type: Schema.Types.ObjectId
   }
 });
 

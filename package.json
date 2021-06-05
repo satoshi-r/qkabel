@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
+    "body-parser": "^1.19.0",
     "bootstrap": "^5.0.1",
     "cherio": "^1.0.0-rc.2",
     "core-js": "^3.9.1",
@@ -35,6 +36,7 @@
     "node-sass": "^4.14.1",
     "nuxt-svg-loader": "^1.2.0",
     "prettier": "^2.2.1",
+    "require-all": "^3.0.0",
     "sass-loader": "^7.1.0"
   }
 }

@@ -5,7 +5,7 @@
     <ul class="catalog-list">
       <li v-for="(item, idx) in catalog" :key="idx" class="catalog-item">
         <!-- <nuxt-link :to="{name: `store-id`, params: {id: item.id, title: item.title} }">{{item.title}}</nuxt-link> -->
-        <a href="#" @click.prevent="openGroup(item)">{{item.title}}</a>
+        <a href="#" @click.prevent="openGroup(item)">{{ item.title }}</a>
       </li>
     </ul>
   </section>
@@ -15,21 +15,21 @@
 <script>
 export default {
   async fetch() {
-    const data = await fetch('http://localhost:3000/api/catalog');
+    const data = await fetch("http://localhost:3000/api/catalog");
     this.catalog = await data.json();
+    this.catalog.sort((prev, next) => prev.id - next.id);
   },
 
   data() {
     return {
       catalog: []
-    }
+    };
   },
 
   methods: {
-    openGroup({id, title}) {
-      const slug = title.toLowerCase().split(" ").join("-");
-      this.$router.push({name: `store-id-slug`, params: {slug, id}});
+    openGroup({ link }) {
+      this.$router.push({ name: `store-groups`, params: { groups: link.replace("/store/", "").slice(0, -1) } });
     }
   }
-}
+};
 </script>

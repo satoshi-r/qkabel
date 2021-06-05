@@ -1,19 +1,16 @@
 const express = require("express");
-const catalog = require("./routes/catalog");
-const popular = require("./routes/popular");
-const groups = require("./routes/groups");
-const products = require("./routes/products");
+const bodyParser = require("body-parser");
+const routes = require("require-all")(__dirname + "/routes");
 const db = require("../db");
 
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(catalog);
-app.use(popular);
-app.use(groups);
-app.use(products);
+for (const name in routes) {
+    app.use(routes[name]);
+}
 
 module.exports = {
     path: "/api",
