@@ -70,6 +70,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     perPage: {
@@ -96,7 +97,7 @@ export default {
     this.setPages();
     this.updateDisplayedList();
 
-    this.$bus.on("onFilterSearch", (list) => {
+    this.$bus.on("onGroupFilter", (list) => {
       this.filteredList = list;
       this.setPages();
       this.updateDisplayedList();

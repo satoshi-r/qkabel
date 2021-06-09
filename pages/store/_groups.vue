@@ -15,8 +15,8 @@
           >
             <div class="item-name">{{ group.name }}</div>
             <div class="item-core">{{ group.values.core }}</div>
-            <div class="item-isolation">{{ group.values.execution }}</div>
-            <div class="item-execution">{{ group.values.insulation }}</div>
+            <div class="item-isolation">{{ group.values.insulation }}</div>
+            <div class="item-execution">{{ group.values.execution }}</div>
             <div class="item-cover">{{ group.values.protect }}</div>
           </a>
           <div v-if="searchResultLength == 0" class="search-notfound">Ничего не найдено</div>
@@ -32,6 +32,9 @@
 import Pagination from "@/components/Pagination";
 import GroupFilter from "@/components/GroupFilter";
 
+/* TODO
+ * [ ] 1. поехала верстка таблицы на больших экранах
+ */
 export default {
   components: {
     Pagination,
@@ -49,11 +52,11 @@ export default {
   },
 
   mounted() {
-    this.$bus.on("onFilterSearch", this.setSearchResultValue);
+    this.$bus.on("onGroupFilter", this.setSearchResultLength);
   },
 
   methods: {
-    setSearchResultValue(list) {
+    setSearchResultLength(list) {
       this.searchResultLength = list.length;
     }
   },

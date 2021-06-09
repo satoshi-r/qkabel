@@ -1,11 +1,12 @@
 <template>
   <div class="filter-nav">
-    <div class="filter-search">
+    <div class="filter-search" :class="filtration ? 'disabled' : ''">
       <input v-model="searchValue"
              @focusin="searchFocused = true"
              @focusout="searchFocused = false"
              type="text"
-             name="filter-search" id="filter-search" />
+             name="filter-search" id="filter-search"
+      />
 
       <label for="filter-search" class="filter-search-label">
         <span :style="{opacity: (!searchFocused && !searchValue.length) ? 1 : 0}" class="filter-search-placeholder">Наименование</span>
@@ -47,7 +48,8 @@
     </div>
 
     <div v-for="(filter, idx) of filters" :key="idx" :class="filter.class" class="dropdown-default">
-      <button :class="filter.list.length == 1 || searchValue.length ? 'disabled' : ''" class="dropdown-btn" @click="toggleDropdown(idx)">
+      <button :class="filter.list.length == 1 || searchValue.length ? 'disabled' : ''" class="dropdown-btn"
+              @click="toggleDropdown(idx)">
         <div class="dropdown-btn-title">{{ filter.title }}</div>
         <div class="dropdown-btn-arrow">
           <svg
@@ -70,6 +72,8 @@
         <div v-show="filter.isShown" class="dropdown-list">
           <div v-for="(value, index) of filter.list" :key="index" class="checkbox-default">
             <input
+              ref="checkbox"
+              @input="onSelectFilter($event, idx, filter.list[index])"
               type="checkbox"
               :name="`checkbox[${idx}][${index}]`"
               :id="`checkbox[${idx}][${index}]`"
@@ -98,7 +102,7 @@
       </transition>
     </div>
 
-    <button class="btn-delete disable">
+    <button @click="filterClear" :class="searchValue.length || !filtration ? 'disabled' : ''" class="btn-delete">
       <svg
         width="24"
         height="24"
@@ -114,10 +118,16 @@
   </div>
 </template>
 
+
 <script>
 /*TODO
  [x] 1. если ввести в поиск ааб, то остаётся пагинатор с одной страницей
  [x] 2. обновлять viewed отфильтрованного списка
+ [x] 3. если очистить все чекбоксы, то некорректно отображается список
+ [ ] 4. настроить title для дропдауна — если выбран один, то отображать какой,
+        если несколько, то в таком виде `Выбрано: ${checked.length}`
+ [x] 5. если очищать фильтр при открытом дропдауне, то галочка остаётся
+ [x] 6. переименовать событие onFilterSearch
  */
 export default {
   name: "GroupFilter",
@@ -126,12 +136,14 @@ export default {
     return {
       filters: {
         core: { title: "Тип жилы", class: "filter-nav-core", isShown: false, list: [] },
-        execution: { title: "Исполнение", class: "filter-nav-execution", isShown: false, list: [] },
         insulation: { title: "Изоляция", class: "filter-nav-isolation", isShown: false, list: [] },
+        execution: { title: "Исполнение", class: "filter-nav-execution", isShown: false, list: [] },
         protect: { title: "Защитный покров", class: "filter-nav-cover", isShown: false, list: [] }
       },
       searchValue: "",
-      searchFocused: false
+      searchFocused: false,
+      filtration: false,
+      inputsChecked: []
     };
   },
 
@@ -155,9 +167,50 @@ export default {
       if (evt.target.closest([".dropdown-default"])) return;
       this.closeDropdowns();
     });
+
+
   },
 
   methods: {
+    onSelectFilter(evt, idx, value) {
+
+      const filteredList = [];
+      const groupsValues = this.groups.map(item => Object.values(item.values));
+
+      if (evt.target.checked) {
+        this.inputsChecked.push(value);
+      } else {
+        this.inputsChecked.forEach((item, i) => {
+          if (item == value) {
+            this.inputsChecked.splice(i, 1);
+          }
+        });
+      }
+
+      if (this.inputsChecked.length) {
+        this.filtration = true;
+      } else {
+        this.filtration = false;
+      }
+
+      groupsValues.forEach((values, i) => {
+        this.inputsChecked.forEach(input => {
+          if (values.includes(input)) {
+            filteredList.push(this.groups[i]);
+          }
+        });
+      });
+
+      this.$bus.emit("onGroupFilter", (filteredList.length ? filteredList : this.groups));
+    },
+
+    filterClear() {
+      this.$refs.checkbox.forEach(el => el.checked = false);
+      this.inputsChecked.length = 0;
+      this.filtration = false;
+      this.$bus.emit("onGroupFilter", this.groups);
+    },
+
     closeDropdowns(type) {
       Object.values(this.filters).forEach((item) => {
         if (!type || type && !this.filters[type].isShown) {
@@ -187,15 +240,17 @@ export default {
   watch: {
     searchValue(val) {
       if (!val.length) {
-        this.$bus.emit("onFilterSearch", this.groups);
+        this.$bus.emit("onGroupFilter", this.groups);
       }
 
       if (!/^[a-zA-Zа-яА-я0-9]+$/.test(val)) return;
 
+      this.filterClear();
       const filteredList = this.groups.filter(({ name }) => name.toLowerCase().includes(val));
-      this.$bus.emit("onFilterSearch", filteredList);
+      this.$bus.emit("onGroupFilter", filteredList);
       this.$store.dispatch("list/updateDisplayedList", filteredList);
     }
+
   }
 };
 </script>
