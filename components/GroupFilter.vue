@@ -50,7 +50,7 @@
     <div v-for="(filter, idx) of filters" :key="idx" :class="filter.class" class="dropdown-default">
       <button :class="filter.list.length == 1 || searchValue.length ? 'disabled' : ''" class="dropdown-btn"
               @click="toggleDropdown(idx)">
-        <div class="dropdown-btn-title">{{ filter.title }}</div>
+        <div class="dropdown-btn-title">{{ filter.currentTitle }}</div>
         <div class="dropdown-btn-arrow">
           <svg
             :class="filter.isShown ? 'active' : ''"
@@ -135,16 +135,22 @@ export default {
   data() {
     return {
       filters: {
-        core: { title: "Тип жилы", class: "filter-nav-core", isShown: false, list: [] },
-        insulation: { title: "Изоляция", class: "filter-nav-isolation", isShown: false, list: [] },
-        execution: { title: "Исполнение", class: "filter-nav-execution", isShown: false, list: [] },
-        protect: { title: "Защитный покров", class: "filter-nav-cover", isShown: false, list: [] }
+        core: { title: "Тип жилы", currentTitle: "", class: "filter-nav-core", isShown: false, list: [] },
+        insulation: { title: "Изоляция", currentTitle: "", class: "filter-nav-isolation", isShown: false, list: [] },
+        execution: { title: "Исполнение", currentTitle: "", class: "filter-nav-execution", isShown: false, list: [] },
+        protect: { title: "Защитный покров", currentTitle: "", class: "filter-nav-cover", isShown: false, list: [] }
       },
       searchValue: "",
       searchFocused: false,
       filtration: false,
       inputsChecked: []
     };
+  },
+
+  created() {
+    for (const filter in this.filters) {
+      this.filters[filter].currentTitle = this.filters[filter].title;
+    }
   },
 
   mounted() {
@@ -167,13 +173,10 @@ export default {
       if (evt.target.closest([".dropdown-default"])) return;
       this.closeDropdowns();
     });
-
-
   },
 
   methods: {
     onSelectFilter(evt, idx, value) {
-
       const filteredList = [];
       const groupsValues = this.groups.map(item => Object.values(item.values));
 
@@ -186,6 +189,8 @@ export default {
           }
         });
       }
+
+      this.setTitle();
 
       if (this.inputsChecked.length) {
         this.filtration = true;
@@ -204,10 +209,38 @@ export default {
       this.$bus.emit("onGroupFilter", (filteredList.length ? filteredList : this.groups));
     },
 
+    setTitle() {
+      const checked = {
+        core: [],
+        insulation: [],
+        execution: [],
+        protect: []
+      };
+
+      for (const filter in this.filters) {
+        this.inputsChecked.forEach(item => {
+          if (this.filters[filter].list.includes(item)) {
+            checked[filter].push(item);
+          }
+        });
+      }
+
+      for (const filter in checked) {
+        if (checked[filter].length == 0) {
+          this.filters[filter].currentTitle = this.filters[filter].title;
+        } else if (checked[filter].length == 1) {
+          this.filters[filter].currentTitle = checked[filter][0];
+        } else {
+          this.filters[filter].currentTitle = `Выбрано: ${checked[filter].length}`;
+        }
+      }
+    },
+
     filterClear() {
       this.$refs.checkbox.forEach(el => el.checked = false);
       this.inputsChecked.length = 0;
       this.filtration = false;
+      this.setTitle();
       this.$bus.emit("onGroupFilter", this.groups);
     },
 
