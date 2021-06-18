@@ -1,6 +1,12 @@
-const parser = require("../../parser");
+const Popular = require("../models/Popular");
 
 module.exports.get = async function (req, res) {
-  const popular = await parser.getPopular();
-  res.status(200).json(popular);
+  Popular.find({}, function (err, items) {
+    if (err) {
+      return res.status(500).json({
+        message: "Error getting catalog.",
+      });
+    }
+    return res.status(200).json(items);
+  });
 };

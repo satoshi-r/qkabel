@@ -19,10 +19,6 @@ export const actions = {
     }
   },
 
-  updateList({ commit }, list) {
-    commit("setList", list);
-  },
-
   updateDisplayedList({ commit }, list) {
     commit("setDisplayedList", list);
   }

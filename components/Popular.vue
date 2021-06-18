@@ -9,11 +9,10 @@
             <div class="section-title">{{ item.title }}</div>
 
             <div class="section-group">
-              <nuxt-link v-for="(elem, i) in item.elems" :key="i" :to="{name: `store-id`, params: {id: elem.title, title: elem.title} }" class="btn-stroke">{{ elem.title }}</nuxt-link>
+              <nuxt-link v-for="(elem, i) in item.elems" :key="i" :to="{name: `store-products`, params: {products: elem.link.replace('/store/', '').slice(0, -1)} }" class="btn-stroke">{{ elem.title }}</nuxt-link>
             </div>
           </div>
         </div>
-        
       </masonry>
     </div>
   </section>

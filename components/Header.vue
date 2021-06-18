@@ -49,7 +49,7 @@
           <CloseSvg id="svg-close" />
           Весь каталог
         </button>
-        <form action="/search/index.php" class="search">
+        <form class="search">
           <div class="search-input">
             <label for="search">
               <SearchSvg />
@@ -112,8 +112,8 @@
       <transition name="fade">
         <div v-if="isShowMenu" class="header-catalog">
           <ul class="container">
-            <li v-for="item of catalog" :key="item" class="header-catalog-item">
-              <nuxt-link :to="item.link">{{ item.title }}</nuxt-link>
+            <li v-for="(item, idx) of catalog" :key="idx" class="header-catalog-item">
+              <nuxt-link :to="{ name: `store-groups`, params: { groups: item.link.replace('/store/', '').slice(0, -1), callback: closeMenu }}">{{ item.title }}</nuxt-link>
             </li>
           </ul>
         </div>

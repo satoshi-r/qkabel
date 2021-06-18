@@ -10,6 +10,7 @@
           <a
             href="#"
             v-for="(group, idx) of displayedGroups"
+            @click.prevent="openProducts(group)"
             :key="idx"
             class="table-item"
           >
@@ -43,6 +44,7 @@ export default {
 
   async fetch({ store, params }) {
     await store.dispatch("list/fetch", params);
+    if (params?.callback) params.callback();
   },
 
   data() {
@@ -58,6 +60,10 @@ export default {
   methods: {
     setSearchResultLength(list) {
       this.searchResultLength = list.length;
+    },
+
+    openProducts({link}) {
+      this.$router.push({ name: `store-products`, params: { products: link.replace("/store/", "").slice(0, -1) } });
     }
   },
 
